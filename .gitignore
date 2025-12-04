@@ -1,6 +1,15 @@
-.env
-alembic
-venv
-alembic.ini
-.idea
-__pycache__
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+*.env
+.envrc
+.DS_Store
+
+# IDEs
+.idea/
+.vscode/
