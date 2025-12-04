@@ -1,0 +1,28 @@
+first create virtual environment
+
+then activate it ---> source venv/bin/activate
+
+next install dependencies
+    fastapi = for fastapi
+    mysqlclint = for mysql server databases driver
+    uvicorn = to run fastapi app
+    pydantic-settings = for define initial configuration with environment variables
+    python-dotenv = for python dotenv file and configure variables
+    alembic = for migrations with databases
+
+create app directpry inside it other files goes. But main.py in root directory
+
+inside app -->
+             config directory  == first create this with Settings class
+             db directory == second databse integrations
+             models directory == third models
+             (use alembic for migrations)
+                alembic init alembic 
+                    (then in alembic ini file change the sqlalchemy_url = keep this blank)
+                    (in env.py file change the required /import settings with databse url, and change online connect with create engine)
+                    (import base model file to get metadata and change target metdata = Base.metadata)
+                    after that run == alembic revision --autogenerate -m "create current model migrations to table"
+                                      alembic upgrade head
+             schemas directory
+             routers directory(service layer)
+             controller (controller layer)
