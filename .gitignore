@@ -13,3 +13,6 @@ venv/
 # IDEs
 .idea/
 .vscode/
+
+alembic
+alembic.ini
