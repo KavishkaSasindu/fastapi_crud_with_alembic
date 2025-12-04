@@ -1,6 +1,8 @@
-from typing import List
+from typing import List, Optional
 
 from fastapi.params import Depends
+from pydantic import EmailStr
+
 from app.db.session import get_db
 from app.models.person import Person
 from sqlalchemy.orm import Session
@@ -15,3 +17,7 @@ def person_create(data: person_schema.PersonCreate, db: Session = Depends(get_db
 
 def get_all_persons(db: Session = Depends(get_db))->List[type[Person]]:
     return db.query(Person).offset(0).all()
+
+def get_person_by_email(email: EmailStr, db: Session = Depends(get_db))->Optional[Person]:
+    person_data = db.query(Person).filter(Person.email == email).first()
+    return person_data
