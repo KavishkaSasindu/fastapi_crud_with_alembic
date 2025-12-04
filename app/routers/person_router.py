@@ -1,8 +1,10 @@
+from typing import List
+
 from fastapi import APIRouter,Depends,HTTPException,status
 from sqlalchemy.orm import Session
 from app.db.session import get_db
-from app.services.person_service import person_create
-from app.schemas.person_schema import PersonCreate
+from app.services.person_service import person_create,get_all_persons
+from app.schemas.person_schema import PersonCreate,PersonAll
 
 router = APIRouter(prefix="/person", tags=["person"])
 
@@ -10,5 +12,15 @@ router = APIRouter(prefix="/person", tags=["person"])
 def create_person(person_req: PersonCreate, db: Session = Depends(get_db)):
     try:
         return person_create(person_req, db)
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(e))
+
+@router.get("/",response_model=List[PersonAll],status_code=status.HTTP_200_OK)
+def all_persons(db: Session = Depends(get_db)):
+    try:
+        all_users = get_all_persons(db)
+        if len(all_users) > 0:
+            return all_users
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Not Found")
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(e))

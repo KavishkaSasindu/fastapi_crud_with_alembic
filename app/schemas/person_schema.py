@@ -7,7 +7,7 @@ class PersonBase(BaseModel):
 class PersonCreate(PersonBase):
     pass
 
-class PersonGetOne(PersonBase):
+class PersonAll(PersonBase):
     person_id: int
 
     class Config:

@@ -9,7 +9,7 @@ class ItemBase(BaseModel):
 class ItemCreate(ItemBase):
     pass
 
-class Items(ItemBase):
+class GetItems(ItemBase):
     item_id: int
 
     class Config:

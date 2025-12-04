@@ -1,3 +1,5 @@
+from typing import List
+
 from fastapi.params import Depends
 from sqlalchemy.orm import Session
 from app.db.session import get_db
@@ -10,3 +12,7 @@ def item_create(data: item_schema.ItemCreate, db: Session = Depends(get_db))->It
     db.commit()
     db.refresh(item_data)
     return item_data
+
+def get_all_items(db: Session = Depends(get_db))->List[type[Items]]:
+    all_items = db.query(Items).offset(0).all()
+    return all_items
