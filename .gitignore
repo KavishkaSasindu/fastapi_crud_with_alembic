@@ -2,5 +2,5 @@
 alembic
 venv
 alembic.ini
-,idea
+.idea
 __pycache__
